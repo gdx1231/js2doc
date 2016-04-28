@@ -1,3 +1,38 @@
+window.EWA = {
+	VERSION : 2.6,
+	/** 版本 */
+	LANG : 'zhcn',
+	/** 当前语言代码 */
+	SHOW_ERROR : true // 是否提示执行错误
+	,
+	__p : window.location.pathname,
+	__inc : 0
+};
+
+// 避免 http://gezz.cn/////////ex/grd.jsp 情况出现
+while (EWA.__p.indexOf('//') == 0) {
+	EWA.__p = EWA.__p.replace('//', '/');
+	EWA.__inc++;
+	if (EWA.__inc > 100) {
+		break;
+	}
+}
+/** EWA的根目录 */
+EWA["CP"] = "/" + EWA.__p.split('/')[1] + "/";
+
+var userAgent = window.navigator.userAgent.toLowerCase();
+/**
+ * 浏览器类型
+ */
+EWA.B = {
+	VERSION : (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1],
+	SAFAIR : /webkit/.test(userAgent),
+	OPERA : /opera/.test(userAgent),
+	IE : (/msie/.test(userAgent) || /traaaaaident/.test(userAgent)) && !/opera/.test(userAgent),
+	MOZILLA : /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent),
+	GOOGLE : /chrome/.test(userAgent),
+	PAD : /ipad|iphone|android|mobile/.test(userAgent)
+};
 /**
  * Xml对象
  */
